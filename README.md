@@ -229,12 +229,37 @@ bun run test
 
 Register and resolve AI agents on the [ERC-8004](https://eips.ethereum.org/EIPS/eip-8004) Identity Registry (Trustless Agents). Supported networks: BSC (56), BSC Testnet (97), Ethereum, Base, Polygon, and their testnets where the [official registry](https://github.com/erc-8004/erc-8004-contracts) is deployed. The `agentURI` should point to a JSON metadata file following the [Agent Metadata Profile](https://best-practices.8004scan.io/docs/01-agent-metadata-standard.html) (name, description, image, and `services` such as MCP endpoint).
 
-| Name                    | Description                                                                 |
-| ----------------------- | --------------------------------------------------------------------------- |
-| register_erc8004_agent  | Register an agent on the ERC-8004 Identity Registry; returns agent ID    |
-| set_erc8004_agent_uri   | Update the metadata URI for an existing ERC-8004 agent (owner only)        |
-| get_erc8004_agent       | Get agent info (owner and tokenURI) from the Identity Registry              |
-| get_erc8004_agent_wallet| Get the verified payment wallet for an agent (for x402 / payments)           |
+#### Identity
+
+| Name                     | Description                                                             |
+| ------------------------ | ----------------------------------------------------------------------- |
+| register_erc8004_agent   | Register an agent on the ERC-8004 Identity Registry; returns agent ID   |
+| set_erc8004_agent_uri    | Update the metadata URI for an existing ERC-8004 agent (owner only)     |
+| get_erc8004_agent        | Get agent info (owner and tokenURI) from the Identity Registry          |
+| get_erc8004_agent_wallet | Get the verified payment wallet for an agent (for x402 / payments)      |
+
+#### Reputation
+
+| Name                       | Description                                                           |
+| -------------------------- | --------------------------------------------------------------------- |
+| submit_erc8004_reputation  | Submit scored feedback (-128 to 127) for an agent on-chain            |
+| get_erc8004_reputation     | Get total feedback count, average score, and recent feedback entries   |
+
+#### Metadata
+
+| Name                       | Description                                                           |
+| -------------------------- | --------------------------------------------------------------------- |
+| set_erc8004_metadata       | Set on-chain key-value metadata (version, mcp.endpoint, did, etc.)    |
+| get_erc8004_metadata       | Read a single metadata value by key                                   |
+| batch_get_erc8004_metadata | Read multiple metadata values in one call                             |
+
+#### Discovery
+
+| Name                       | Description                                                           |
+| -------------------------- | --------------------------------------------------------------------- |
+| list_erc8004_agents        | List all agents owned by a specific address                           |
+| get_erc8004_agent_count    | Get total registered agent count on a chain                           |
+| search_erc8004_agents      | Search agents by name, URI, or metadata content                       |
 
 ### Greenfield tools
 
@@ -287,5 +312,6 @@ This project is built upon and inspired by the following open-source projects:
 
 - [TermiX-official/bsc-mcp](https://github.com/TermiX-official/bsc-mcp) - Original BSC MCP implementation
 - [mcpdotdirect/evm-mcp-server](https://github.com/mcpdotdirect/evm-mcp-server) - EVM-compatible MCP server implementation
+- [Sperax/bnb-chain-toolkit](https://github.com/Sperax/bnb-chain-toolkit) - ERC-8004 reputation, metadata, and agent discovery tools
 
 We extend our gratitude to the original authors for their contributions to the blockchain ecosystem.

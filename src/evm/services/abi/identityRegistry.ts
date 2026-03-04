@@ -1,5 +1,6 @@
 /**
  * Minimal ABI for ERC-8004 Identity Registry (ERC721 with register/setAgentURI).
+ * Extended with setMetadata/getMetadata for on-chain key-value storage.
  * Source: https://github.com/erc-8004/erc-8004-contracts
  */
 export const IDENTITY_REGISTRY_ABI = [
@@ -42,6 +43,34 @@ export const IDENTITY_REGISTRY_ABI = [
     type: "function"
   },
   {
+    inputs: [
+      { internalType: "uint256", name: "agentId", type: "uint256" },
+      { internalType: "string", name: "metadataKey", type: "string" },
+      { internalType: "bytes", name: "metadataValue", type: "bytes" }
+    ],
+    name: "setMetadata",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      { internalType: "uint256", name: "agentId", type: "uint256" },
+      { internalType: "string", name: "metadataKey", type: "string" }
+    ],
+    name: "getMetadata",
+    outputs: [{ internalType: "bytes", name: "", type: "bytes" }],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [{ internalType: "address", name: "owner", type: "address" }],
+    name: "balanceOf",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
     anonymous: false,
     inputs: [
       { indexed: true, internalType: "uint256", name: "agentId", type: "uint256" },
@@ -49,6 +78,16 @@ export const IDENTITY_REGISTRY_ABI = [
       { indexed: true, internalType: "address", name: "owner", type: "address" }
     ],
     name: "Registered",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: "address", name: "from", type: "address" },
+      { indexed: true, internalType: "address", name: "to", type: "address" },
+      { indexed: true, internalType: "uint256", name: "tokenId", type: "uint256" }
+    ],
+    name: "Transfer",
     type: "event"
   }
 ] as const
